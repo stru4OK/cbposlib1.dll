@@ -1,0 +1,2207 @@
+﻿<Window x:Class="BonusSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Ioc="clr-namespace:GalaSoft.MvvmLight.Ioc;assembly=GalaSoft.MvvmLight.Extras"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:BonusSystem"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="{Binding title,
+                        UpdateSourceTrigger=PropertyChanged}"
+        Width="1190"
+        Height="600"
+        mc:Ignorable="d">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Offset="0" Color="Beige" />
+            <GradientStop FrameworkElement.FlowDirection="RightToLeft" Offset="1" Color="#FFD49B03" />
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Window.DataContext>
+        <local:ViewModel />
+    </Window.DataContext>
+
+    <Grid>
+
+        <TabControl x:Name="tabControl"
+                    Width="1190"
+                    Height="600"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <TabControl.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="Beige" />
+                    <GradientStop FrameworkElement.FlowDirection="RightToLeft" Offset="1" Color="#FFD49B03" />
+                </LinearGradientBrush>
+            </TabControl.Background>
+            <TabItem Width="300"
+                     Margin="-2,-2,0,-1"
+                     HorizontalAlignment="Left"
+                     FontSize="16"
+                     Header="Конфигурация библиотеки">
+                <TabItem.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#FFF3F3F3" />
+                        <GradientStop Offset="0.5" Color="#FFEBEBEB" />
+                        <GradientStop Offset="0.5" Color="#FFDDDDDD" />
+                        <GradientStop Offset="1" Color="#FFF5BC23" />
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Offset="0" Color="Beige" />
+                            <GradientStop FrameworkElement.FlowDirection="RightToLeft" Offset="1" Color="#FFD49B03" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <TextBox x:Name="terminalId"
+                             Width="100"
+                             Height="26"
+                             Margin="148,27,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding terminalId,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Идентификатор терминала, посылающего запросы в процессинг. Уникальное значение терминала в бонусной системе." />
+                    <Label x:Name="label"
+                           Margin="24,27,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="terminalId"
+                           FontSize="12" />
+                    <Label x:Name="label2"
+                           Margin="146,53,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="числовой код терминала"
+                           FontSize="9" />
+                    <TextBox x:Name="serverAddrB"
+                             Width="290"
+                             Height="26"
+                             Margin="148,79,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding serverAddr,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Основное адрес бонусного процессинга. Основной канал для отправки запроса в процессинг." />
+                    <Label x:Name="serverAddrL"
+                           Margin="24,79,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="serverAddr"
+                           FontSize="12" />
+                    <Label x:Name="serverAddrL2"
+                           Margin="148,102,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="основной адрес процессинга"
+                           FontSize="9" />
+                    <TextBox x:Name="terminalPasswordB"
+                             Width="100"
+                             Height="26"
+                             Margin="148,172,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding terminalPassword,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Пароль для авторизации терминала. Используется для подписывания запросов, отправляемых в процессинг." />
+                    <Label x:Name="terminalPasswordL"
+                           Margin="24,172,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="terminalPassword"
+                           FontSize="12" />
+                    <Label x:Name="terminalPasswordL2"
+                           Margin="148,191,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="пароль терминала"
+                           FontSize="9" />
+                    <TextBox x:Name="sslModeB"
+                             Width="100"
+                             Height="26"
+                             Margin="148,213,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding sslMode,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Разрешение режима шифрования SSL при взаимодействии с процессингом. При включенном/выключенном режиме (1/0), адрес должен быть соответствующим (https/http)." />
+                    <Label x:Name="sslModeL"
+                           Margin="24,213,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="sslMode"
+                           FontSize="12" />
+                    <Label x:Name="sslMode2"
+                           Margin="148,234,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="разрешение режима SSL"
+                           FontSize="9" />
+                    <Label x:Name="globalBonusOffline1L1"
+                           Margin="793,81,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="globalBonusOffline 1"
+                           FontSize="12" />
+                    <TextBox x:Name="globalBonusOfflineB1"
+                             Width="100"
+                             Height="26"
+                             Margin="935,81,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding globalBonusOffline_1,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Процент бонусирования глобальных бонусов в режиме оффлайн (offlineMode=1) для 1го типа карт." />
+                    <Label x:Name="globalBonusOffline1L2"
+                           Margin="933,107,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="ставка бонусирования глоб. бонусов в оффлайне"
+                           FontSize="9" />
+                    <Label x:Name="serverAltAddrL"
+                           Margin="24,124,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="serverAltAddr"
+                           FontSize="12" />
+                    <TextBox x:Name="serverAltAddrB"
+                             Width="290"
+                             Height="26"
+                             Margin="148,124,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding serverAltAddr,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Альтернативный адрес бонусного процессинга для отправки запроса при недоступности (истечение timeout при попытке установить соединение) процессинга по основному адресу." />
+                    <Label x:Name="serverAltAddrL2"
+                           Margin="148,150,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="альтернативный адрес процессинга"
+                           FontSize="9" />
+                    <Label x:Name="sslKeyL"
+                           Margin="24,256,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="sslKey"
+                           FontSize="12" />
+                    <TextBox x:Name="sslKeyB"
+                             Width="100"
+                             Height="26"
+                             Margin="148,256,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding sslKey,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Файл с SSL ключом шифрования, который может применяться при включенном SSL режиме (sslMode=1)." />
+                    <Label x:Name="sslKeyL2"
+                           Margin="148,277,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="SSL-ключ шифрования"
+                           FontSize="9" />
+                    <Label x:Name="shiftModeL"
+                           Margin="24,299,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="shiftMode"
+                           FontSize="12" />
+                    <TextBox x:Name="shiftModeB"
+                             Width="100"
+                             Height="26"
+                             Margin="148,299,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding shiftMode,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Разрешение режима смен. При данном режиме возможно использование API бонусной библиотеки, отвечающей за открытие/закрытие смены (OpenShift/CloseShift)." />
+                    <Label x:Name="shiftModeL2"
+                           Width="122"
+                           Margin="148,325,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="разрешение режима смен"
+                           FontSize="9" />
+                    <Label x:Name="hashCardNumL"
+                           Margin="24,346,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="hashCardNum"
+                           FontSize="12" />
+                    <TextBox x:Name="hashCardNumB"
+                             Width="100"
+                             Height="26"
+                             Margin="148,346,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding hashCardNumConfig,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Хэширование номера карты." />
+                    <Label x:Name="hashCardNumL2"
+                           Margin="148,370,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="разрешение хэширование номера карты"
+                           FontSize="9" />
+                    <Label x:Name="logSizeL"
+                           Margin="461,27,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="logSize"
+                           FontSize="12" />
+                    <TextBox x:Name="logSizeB"
+                             Width="160"
+                             Height="26"
+                             Margin="595,27,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding logSize,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Указание максимального размера файла лога, котором хранятся записи успешных проведенных запросов, которые используются для составления отчетов (полного или детального)." />
+                    <Label x:Name="logSizeL2"
+                           Margin="597,53,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="размер лог-файла"
+                           FontSize="9" />
+                    <Label x:Name="billXMLConvertTableL"
+                           Margin="461,79,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="billXMLConvertTable"
+                           FontSize="12" />
+                    <TextBox x:Name="billXMLConvertTableB"
+                             Width="160"
+                             Height="26"
+                             Margin="593,79,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding billXMLConvertTable,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Конвертер имени продукта в составленном файле чека (bill.jsn или bill.xml) для дальнейшей отправки данного модифицированного файла чека в платежном запросе. Возможные следующие значения: CP1251, KOI8R, UTF8." />
+                    <Label x:Name="billXMLConvertTableL2"
+                           Margin="597,104,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="формат конвертера файла чека"
+                           FontSize="9" />
+                    <Label x:Name="timeZoneL"
+                           Margin="461,131,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="timeZone"
+                           FontSize="12" />
+                    <TextBox x:Name="timeZoneB"
+                             Width="160"
+                             Height="26"
+                             Margin="593,131,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding timeZone,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Указание часового пояса местоположения терминала. Используется для синхронизации внутреннего времени терминала со временем процессинга." />
+                    <Label x:Name="timeZoneL2"
+                           Margin="597,157,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="часовой пояс"
+                           FontSize="9" />
+                    <Label x:Name="retailNetworkNameL"
+                           Margin="461,183,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="retailNetworkName"
+                           FontSize="12" />
+                    <TextBox x:Name="retailNetworkNameB"
+                             Width="160"
+                             Height="26"
+                             Margin="593,183,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding retailNetworkName,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Название торгово-сетевого предприятия, в которой используется данный терминал. Используется для печати суммы локальных бонусов в чеках Печатается только при разрешении печати локальных бонусов в чеке (noLocalBonusPrint = 0)." />
+                    <Label x:Name="retailNetworkNameL2"
+                           Margin="597,209,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="название ТСП"
+                           FontSize="9" />
+                    <Label x:Name="timeoutL"
+                           Margin="461,235,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="timeout"
+                           FontSize="12" />
+                    <TextBox x:Name="timeoutB"
+                             Width="158"
+                             Height="26"
+                             Margin="595,235,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding timeout,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Время таймаута соединения с бонусным процессингом для основного адреса (serverAddr), по истечении которого идет попытка соединения по альтернативному адресу." />
+                    <Label x:Name="timeoutL2"
+                           Margin="597,261,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="время всего таймаута"
+                           FontSize="9" />
+                    <Label x:Name="offlineModeL"
+                           Margin="461,391,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="offlineMode"
+                           FontSize="12" />
+                    <TextBox x:Name="offlineModeB"
+                             Width="158"
+                             Height="26"
+                             Margin="595,391,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding offlineMode,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="По истечении таймаута на установку соединения по основному и/или альтернативному каналу при данном включенном режиме будет проведена оффлайновая платежная операция с использованием указанного процента бонусирования по карте данного типа (class_card)." />
+                    <Label x:Name="offlineModeL2"
+                           Margin="597,416,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="разрешение оффлайновых операций"
+                           FontSize="9" />
+                    <Label x:Name="orgFeeOfflineL"
+                           Margin="793,27,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="orgFeeOffline"
+                           FontSize="12" />
+                    <TextBox x:Name="orgFeeOfflineB"
+                             Width="100"
+                             Height="26"
+                             Margin="935,27,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding orgFeeOffline,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Процент вознаграждения организатора в режиме оффлайн. Используется при включенном режиме оффлайновых операций (offlineMode=1)." />
+                    <Label x:Name="orgFeeOfflineL2"
+                           Margin="935,53,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="вознаграждение орг. в оффлайне"
+                           FontSize="9" />
+                    <Label x:Name="localBonusOffline1L"
+                           Margin="793,133,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="localBonusOffline 1"
+                           FontSize="12" />
+                    <Label x:Name="globalBonusOffline2L"
+                           Margin="793,185,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="globalBonusOffline 2"
+                           FontSize="12" />
+                    <Label x:Name="localBonusOffline2L1"
+                           Margin="793,237,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="localBonusOffline 2"
+                           FontSize="12" />
+                    <Label x:Name="globalBonusOffline5L1"
+                           Margin="793,289,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="globalBonusOffline 5"
+                           FontSize="12" />
+                    <Label x:Name="localBonusOffline5L1"
+                           Margin="793,341,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="localBonusOffline 5"
+                           FontSize="12" />
+                    <TextBox x:Name="localBonusOffline_1"
+                             Width="100"
+                             Height="26"
+                             Margin="935,133,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding localBonusOffline_1,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Процент бонусирования локальных бонусов в режиме оффлайн (offlineMode=1) для 1го типа карт." />
+                    <TextBox x:Name="globalBonusOffline_2"
+                             Width="100"
+                             Height="26"
+                             Margin="935,185,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding globalBonusOffline_2,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Процент бонусирования глобальных бонусов в режиме оффлайн (offlineMode=1) для 2го типа карт." />
+                    <TextBox x:Name="localBonusOffline_2"
+                             Width="100"
+                             Height="26"
+                             Margin="935,237,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding localBonusOffline_2,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Процент бонусирования локальных бонусов в режиме оффлайн (offlineMode=1) для 2го типа карт." />
+                    <TextBox x:Name="globalBonusOffline_5"
+                             Width="100"
+                             Height="26"
+                             Margin="935,289,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding globalBonusOffline_5,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Процент бонусирования глобальных бонусов в режиме оффлайн (offlineMode=1) для 5го типа карт." />
+                    <TextBox x:Name="localBonusOffline_5"
+                             Width="100"
+                             Height="26"
+                             Margin="935,341,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding localBonusOffline_5,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Процент бонусирования локальных бонусов в режиме оффлайн (offlineMode=1) для 5го типа карт." />
+                    <Label x:Name="globalBonusOffline1L2_Copy"
+                           Margin="933,158,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="ставка бонусирования лок. бонусов в оффлайне"
+                           FontSize="9" />
+                    <Label x:Name="globalBonusOffline1L2_Copy1"
+                           Margin="933,210,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="ставка бонусирования глоб. бонусов в оффлайне"
+                           FontSize="9" />
+                    <Label x:Name="globalBonusOffline1L2_Copy2"
+                           Margin="933,262,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="ставка бонусирования лок. бонусов в оффлайне"
+                           FontSize="9" />
+                    <Label x:Name="globalBonusOffline1L2_Copy3"
+                           Margin="935,314,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="ставка бонусирования глоб. бонусов в оффлайне"
+                           FontSize="9" />
+                    <Label x:Name="globalBonusOffline1L2_Copy4"
+                           Margin="935,366,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="ставка бонусирования лок. бонусов в оффлайне"
+                           FontSize="9" />
+                    <Button x:Name="SaveConfig"
+                            Width="156"
+                            Height="43"
+                            Margin="922,458,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding SaveConfig}"
+                            Content="Сохранить"
+                            FontSize="18">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#FFF3F3F3" />
+                                <GradientStop Offset="0.5" Color="#FFEBEBEB" />
+                                <GradientStop Offset="0.5" Color="#FFDDDDDD" />
+                                <GradientStop Offset="1" Color="#FFEABF2E" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Button.Effect>
+                    </Button>
+                    <ComboBox x:Name="comboBox"
+                              Width="290"
+                              Height="26"
+                              Margin="148,458,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="14.667"
+                              IsReadOnly="True"
+                              ItemsSource="{Binding ConfigProfiles}"
+                              SelectedIndex="{Binding selectItem}"
+                              Text="Профили"
+                              ToolTip="Выберете профиль">
+                        <ComboBox.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#FFF3F3F3" />
+                                <GradientStop Offset="0.5" Color="#FFEBEBEB" />
+                                <GradientStop Offset="0.5" Color="#FFDDDDDD" />
+                                <GradientStop Offset="1" Color="#FFEABF2E" />
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                        <ComboBox.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </ComboBox.Effect>
+                    </ComboBox>
+                    <Label x:Name="Profile"
+                           Width="82"
+                           Height="36"
+                           Margin="24,458,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Профиль" />
+                    <Label x:Name="retailPointAddressL"
+                           Margin="24,391,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="retailPointAddress"
+                           FontSize="12" />
+                    <TextBox x:Name="retailPointAddressB"
+                             Width="290"
+                             Height="26"
+                             Margin="148,392,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding retailPointAddress,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Хэширование номера карты." />
+                    <Label x:Name="retailPointAddressL2"
+                           Margin="148,417,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="адрес ТО"
+                           FontSize="9" />
+                    <!--<Button x:Name="UpdateButton"
+                            Width="132"
+                            Height="26"
+                            Margin="458,458,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding Update}"
+                            Content="Обновить"
+                            FontSize="12"
+                            IsEnabled="{Binding isEnabledUpdate}">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#FFF3F3F3" />
+                                <GradientStop Offset="0.5" Color="#FFEBEBEB" />
+                                <GradientStop Offset="0.5" Color="#FFDDDDDD" />
+                                <GradientStop Offset="1" Color="#FFEABF2E" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Button.Effect>
+                    </Button>-->
+                    <Label x:Name="connect_timeoutL"
+                           Margin="461,288,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="connect_timeout"
+                           FontSize="12" />
+                    <Label x:Name="retry_pauseL"
+                           Margin="461,340,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="retry_pause"
+                           FontSize="12" />
+                    <TextBox x:Name="connect_timeoutB"
+                             Width="158"
+                             Height="26"
+                             Margin="593,288,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding connect_timeout,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Время таймаута низкоуровневого (на каждую функцию)." />
+                    <TextBox x:Name="retry_pauseB"
+                             Width="158"
+                             Height="26"
+                             Margin="593,340,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding retry_pause,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             ToolTip="Время таймаута между функциями запроса ответа от процессинга" />
+                    <Label x:Name="connect_timeoutL2"
+                           Margin="597,314,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="время низкоуровневого таймаута"
+                           FontSize="9" />
+                    <Label x:Name="retry_pauseL2"
+                           Margin="597,366,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="время таймаута между функ. приема"
+                           FontSize="9" />
+
+                </Grid>
+            </TabItem>
+            <TabItem Width="300"
+                     Margin="-2,-2,0,-1"
+                     HorizontalAlignment="Left"
+                     FontSize="16"
+                     Header="Бонусные операции">
+                <TabItem.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#FFF3F3F3" />
+                        <GradientStop Offset="0.5" Color="#FFEBEBEB" />
+                        <GradientStop Offset="0.5" Color="#FFDDDDDD" />
+                        <GradientStop Offset="1" Color="#FFF5BC23" />
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Offset="0" Color="Beige" />
+                            <GradientStop FrameworkElement.FlowDirection="RightToLeft" Offset="1" Color="#FFD49B03" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Button x:Name="EarnBonus"
+                            Width="106"
+                            Height="28"
+                            Margin="38,88,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding EarnOperation}"
+                            Content="Накопление"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="SpendBonus"
+                            Width="106"
+                            Height="30"
+                            Margin="38,126,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding SpendOperation}"
+                            Content="Трата"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="ActivationProc"
+                            Width="106"
+                            Height="30"
+                            Margin="38,277,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding ActivationOperation}"
+                            Content="Активация"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="CancelProc"
+                            Width="104"
+                            Height="30"
+                            Margin="414,346,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding CancelOperation}"
+                            Content="Отмена"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="DepositProc"
+                            Width="104"
+                            Height="30"
+                            Margin="414,461,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding DepositOperation}"
+                            Content="Депозит"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <CheckBox x:Name="isConfirm"
+                              Width="181"
+                              Height="16"
+                              Margin="164,95,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Content="без подтверждения"
+                              FontSize="12"
+                              IsChecked="{Binding isWithoutConfirm,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox x:Name="BillBox"
+                             Width="116"
+                             Height="22"
+                             Margin="248,141,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             RenderTransformOrigin="6.968,6.087"
+                             Text="{Binding billFile,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <CheckBox x:Name="isSimpleActivation"
+                              Width="131"
+                              Height="16"
+                              Margin="164,250,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Content="простая активация"
+                              FontSize="12"
+                              IsChecked="{Binding isSimpleActivation,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                    <CheckBox x:Name="isGiftCard"
+                              Width="131"
+                              Height="16"
+                              Margin="164,269,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Content="подарочная карта "
+                              FontSize="12"
+                              IsChecked="{Binding isGiftCard,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox x:Name="GiftSumBox"
+                             Width="116"
+                             Height="22"
+                             Margin="248,289,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding giftSum,
+                                            StringFormat=0.00,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="Bill"
+                           Width="74"
+                           Height="26"
+                           Margin="156,137,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Файл счета"
+                           FontSize="12" />
+                    <Label x:Name="GiftSum"
+                           Width="46"
+                           Height="26"
+                           Margin="156,285,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Сумма"
+                           FontSize="12" />
+                    <CheckBox x:Name="isReferAFriend"
+                              Width="111"
+                              Height="16"
+                              Margin="164,311,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Content="приведи друга"
+                              FontSize="12"
+                              IsChecked="{Binding isReferAFriend,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox x:Name="ReferAFriendCard"
+                             Width="116"
+                             Height="22"
+                             Margin="248,330,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding referFriendCard,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="GiftSum_Copy"
+                           Width="74"
+                           Height="26"
+                           Margin="156,326,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Карта друга"
+                           FontSize="12" />
+                    <TextBox x:Name="DepositSum"
+                             Width="116"
+                             Height="24"
+                             Margin="626,465,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding depositSum,
+                                            StringFormat=0.00,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="DepositSumLabel"
+                           Width="46"
+                           Height="26"
+                           Margin="530,465,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Сумма"
+                           FontSize="12" />
+                    <Border Width="350"
+                            Height="127"
+                            Margin="226,-192,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <Border Width="350"
+                            Height="147"
+                            Margin="26,216,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <Border Width="354"
+                            Height="66"
+                            Margin="402,443,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <Label x:Name="RRN"
+                           Width="42"
+                           Height="26"
+                           Margin="534,375,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="RRN"
+                           FontSize="12"
+                           RenderTransformOrigin="-0.121,0.5" />
+                    <TextBox x:Name="RrnBox"
+                             Width="116"
+                             Height="24"
+                             Margin="626,375,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding rrn,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Button x:Name="BalanceProc"
+                            Width="104"
+                            Height="31"
+                            Margin="415,77,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderThickness="1"
+                            Command="{Binding BalanceOperation}"
+                            Content="Баланс"
+                            FontFamily="Tahoma"
+                            FontSize="16"
+                            RenderTransformOrigin="0.5,0.5">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button x:Name="PaymentCancelProc"
+                            Width="104"
+                            Height="28"
+                            Margin="414,393,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding PaymentCancelOperation}"
+                            Content="Отмена платежа"
+                            FontFamily="Tahoma"
+                            FontSize="12">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="ConfirmProc"
+                            Width="106"
+                            Height="30"
+                            Margin="38,164,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding ConfirmOperation}"
+                            Content="Подтверждение"
+                            FontFamily="Tahoma"
+                            FontSize="12">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="CashBack"
+                            Width="104"
+                            Height="30"
+                            Margin="40,428,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding CashBackOperation}"
+                            Content="Возврат"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="ExchangeProc"
+                            Width="104"
+                            Height="30"
+                            Margin="414,214,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding ExchangeOperation}"
+                            Content="Замена"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="LinkCardProc"
+                            Width="104"
+                            Height="30"
+                            Margin="414,280,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding LinkCardOperation}"
+                            Content="Линковка"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <TextBox x:Name="bonusCard"
+                             Width="508"
+                             Height="39"
+                             Margin="248,15,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="19"
+                             ForceCursor="True"
+                             Text="{Binding cardNum,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Center">
+                        <TextBox.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </TextBox.Effect>
+                    </TextBox>
+                    <Label x:Name="label1"
+                           Width="144"
+                           Height="38"
+                           Margin="38,15,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Номер карты"
+                           FontSize="21.333" />
+                    <Border Width="355"
+                            Height="99"
+                            Margin="401,334,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <TextBox x:Name="LinkCardNum"
+                             Width="116"
+                             Height="22"
+                             Margin="626,285,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding linkcardNum,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="LinkCard"
+                           Width="76"
+                           Height="26"
+                           Margin="530,277,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Линкуемая"
+                           FontSize="12" />
+                    <Label x:Name="LinkCard2"
+                           Width="76"
+                           Height="26"
+                           Margin="530,293,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="карта"
+                           FontSize="12" />
+                    <Border Width="355"
+                            Height="57"
+                            Margin="401,268,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <TextBox x:Name="TokenText"
+                             Width="116"
+                             Height="24"
+                             Margin="626,216,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             RenderTransformOrigin="1.935,3.826"
+                             Text="{Binding token,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="TokenLabel"
+                           Width="82"
+                           Height="26"
+                           Margin="530,214,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Код замены"
+                           FontSize="12" />
+                    <Border Width="355"
+                            Height="59"
+                            Margin="401,199,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <TextBox x:Name="CashBackBox"
+                             Width="116"
+                             Height="24"
+                             Margin="248,443,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             IsEnabled="{Binding isCashBackFileEnabled,
+                                                 UpdateSourceTrigger=PropertyChanged}"
+                             RenderTransformOrigin="6.968,6.087"
+                             Text="{Binding cashBackFile,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="CashBackFile"
+                           Width="92"
+                           Height="26"
+                           Margin="156,441,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Файл возврата"
+                           FontSize="12" />
+                    <Border Width="350"
+                            Height="137"
+                            Margin="26,373,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <CheckBox x:Name="isPartial"
+                              Width="126"
+                              Height="16"
+                              Margin="164,426,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Content="частичный возврат"
+                              FontSize="12"
+                              IsChecked="{Binding isPartial,
+                                                  UpdateSourceTrigger=PropertyChanged}"
+                              IsEnabled="{Binding isPartialEnabled,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox x:Name="ReceiptData"
+                             Width="350"
+                             Height="431"
+                             Margin="786,78,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontFamily="Global Monospace"
+                             FontSize="13.333"
+                             ForceCursor="True"
+                             Text="{Binding receiptData,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Justify"
+                             TextOptions.TextFormattingMode="Display">
+                        <TextBox.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </TextBox.Effect>
+                    </TextBox>
+                    <Label x:Name="CheckLabel"
+                           Width="178"
+                           Height="38"
+                           Margin="888,15,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Бонусный чек"
+                           FontSize="21.333" />
+                    <TextBox x:Name="RrncashBackBox"
+                             Width="116"
+                             Height="24"
+                             Margin="248,383,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             Text="{Binding cashBackRrn,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="RRNcashBack"
+                           Width="46"
+                           Height="26"
+                           Margin="156,381,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="RRN"
+                           FontSize="12"
+                           RenderTransformOrigin="-0.121,0.5" />
+                    <TextBox x:Name="BillBoxActivation"
+                             Width="116"
+                             Height="22"
+                             Margin="248,228,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             RenderTransformOrigin="6.968,6.087"
+                             Text="{Binding billFile,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="Bill_Copy"
+                           Width="80"
+                           Height="26"
+                           Margin="156,224,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Файл счета"
+                           FontSize="12" />
+                    <Button x:Name="HashCard"
+                            Width="104"
+                            Height="30"
+                            Margin="415,143,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding HashCardNumOperation}"
+                            Content="Хэш карты"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <TextBox x:Name="HashCardNum"
+                             Width="208"
+                             Height="24"
+                             Margin="534,148,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding hashCardNum,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Border Width="355"
+                            Height="58"
+                            Margin="401,130,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <Border Width="350"
+                            Height="128"
+                            Margin="26,78,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                        <Button x:Name="SendOffline"
+                                Width="116"
+                                Height="20"
+                                Margin="221,92,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Command="{Binding SendOfflineOperation}"
+                                Content="Выгрузить оффлайны"
+                                FontFamily="Tahoma"
+                                FontSize="10.5">
+                            <Button.Effect>
+                                <DropShadowEffect />
+                            </Button.Effect>
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform Angle="0.134" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+                    </Border>
+                    <TextBox x:Name="CashBackSumBox"
+                             Width="116"
+                             Height="24"
+                             Margin="248,476,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="12"
+                             IsEnabled="{Binding isCashBackSumEnabled,
+                                                 UpdateSourceTrigger=PropertyChanged}"
+                             RenderTransformOrigin="6.968,6.087"
+                             Text="{Binding cashBackSum,
+                                            StringFormat=0.00,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="CashBackSumText"
+                           Width="86"
+                           Height="26"
+                           Margin="156,467,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Сумма"
+                           FontSize="12" />
+                    <Label x:Name="CashBackSumText2"
+                           Width="60"
+                           Height="26"
+                           Margin="182,482,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="возврата"
+                           FontSize="12" />
+                    <CheckBox x:Name="isSecondTypeCashBack"
+                              Width="141"
+                              Height="16"
+                              Margin="164,409,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Content="второй тип возврата"
+                              FontSize="12"
+                              IsChecked="{Binding isSecondTypeCashBack,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                    <CheckBox x:Name="isRecreateBill"
+                              Width="206"
+                              Height="16"
+                              Margin="164,113,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Content="системное время файла счета"
+                              FontSize="12"
+                              IsChecked="{Binding isRecreateBill,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                    <Button x:Name="OpenShiftProc"
+                            Width="65"
+                            Height="30"
+                            Margin="555,78,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderThickness="1"
+                            Command="{Binding OpenShiftOperation}"
+                            FontFamily="Tahoma"
+                            FontSize="10.5"
+                            RenderTransformOrigin="0.5,0.5">
+                        <TextBlock TextAlignment="Center">
+                            Открыть
+                            <LineBreak />
+                            смену
+                        </TextBlock>
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button x:Name="CloseShiftProc"
+                            Width="65"
+                            Height="30"
+                            Margin="655,78,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderThickness="1"
+                            Command="{Binding CloseShiftOperation}"
+                            FontFamily="Tahoma"
+                            FontSize="10.5"
+                            RenderTransformOrigin="0.5,0.5">
+                        <TextBlock TextAlignment="Center">
+                            Закрыть
+                            <LineBreak />
+                            смену
+                        </TextBlock>
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem Width="285"
+                     Margin="-2,-2,0,-1"
+                     HorizontalAlignment="Left"
+                     FontSize="16"
+                     Header="Служебные операции">
+                <TabItem.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#FFF3F3F3" />
+                        <GradientStop Offset="0.5" Color="#FFEBEBEB" />
+                        <GradientStop Offset="0.5" Color="#FFDDDDDD" />
+                        <GradientStop Offset="1" Color="#FFF5BC23" />
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Margin="0,0,0,28">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Offset="0" Color="Beige" />
+                            <GradientStop FrameworkElement.FlowDirection="RightToLeft" Offset="1" Color="#FFD49B03" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Image x:Name="QR"
+                           Width="100"
+                           Height="100"
+                           Margin="341,45,0,390"
+                           HorizontalAlignment="Left"
+                           OpacityMask="#FFCD5B5B"
+                           Source="{Binding QRImage}" />
+
+                    <TextBox x:Name="CardNumB"
+                             Width="130"
+                             Height="24"
+                             Margin="160,45,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding cardNumForHashEP,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Border Height="131"
+                            Margin="25,27,45,0"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                        <TextBox x:Name="hashCardExtraPayment"
+                                 Width="515"
+                                 Height="39"
+                                 Margin="459,18,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 FontSize="20"
+                                 ForceCursor="True"
+                                 Text="{Binding hashCardEP,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 TextAlignment="Center">
+                            <TextBox.Effect>
+                                <DropShadowEffect BlurRadius="10" />
+                            </TextBox.Effect>
+                        </TextBox>
+                    </Border>
+                    <Button Width="110"
+                            Height="30"
+                            Margin="705,98,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding HashCardEPOperation}"
+                            Content="Получить хэш"
+                            FontFamily="Tahoma"
+                            FontSize="15">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Label x:Name="CardNumL"
+                           Width="147"
+                           Height="26"
+                           Margin="35,43,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Номер карты"
+                           FontSize="12" />
+                    <Border Height="55"
+                            Margin="25,178,45,0"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <Label x:Name="RRNL"
+                           Width="147"
+                           Height="26"
+                           Margin="35,192,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="RRN"
+                           FontSize="12" />
+                    <TextBox x:Name="RequestIdB"
+                             Width="130"
+                             Height="24"
+                             Margin="160,194,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding rrn,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Button x:Name="BMSConfirmOperation"
+                            Width="215"
+                            Height="30"
+                            Margin="485,190,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding BMSConfirmOperation}"
+                            Content="Подтвердить платеж"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button x:Name="BMSCancelOperation"
+                            Width="215"
+                            Height="30"
+                            Margin="785,190,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding BMSCancelOperation}"
+                            Content="Отменить платеж"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Label x:Name="BMSL"
+                           Width="120"
+                           Height="30"
+                           Margin="1015,203,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="BMS операции"
+                           FontSize="16"
+                           Opacity="0.5"
+                           RenderTransformOrigin="0.5,0">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Label.Effect>
+                    </Label>
+                    <Label x:Name="HashCardL"
+                           Width="185"
+                           Height="30"
+                           Margin="950,128,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Хэш карты для доплаты"
+                           FontSize="16"
+                           Opacity="0.5">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Label.Effect>
+                    </Label>
+                    <Border Height="75"
+                            Margin="25,253,45,0"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <Label x:Name="BMSL_Copy"
+                           Width="120"
+                           Height="30"
+                           Margin="1015,298,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="BMS операции"
+                           FontSize="16"
+                           Opacity="0.5"
+                           Visibility="Hidden">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Label.Effect>
+                    </Label>
+                    <Label x:Name="CardNumForActivationL"
+                           Width="147"
+                           Height="26"
+                           Margin="35,264,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Номер карты"
+                           FontSize="12"
+                           Visibility="Hidden" />
+                    <TextBox x:Name="CardNumForActivationB"
+                             Width="130"
+                             Height="24"
+                             Margin="160,264,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding cardNumForActivation,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             Visibility="Hidden" />
+                    <Label x:Name="TerminalIdL"
+                           Width="147"
+                           Height="26"
+                           Margin="35,290,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Номер терминала"
+                           FontSize="12"
+                           Visibility="Hidden" />
+                    <TextBox x:Name="TerminalIdB"
+                             Width="130"
+                             Height="24"
+                             Margin="160,293,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding terminalIdForActivationBMS,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             Visibility="Hidden" />
+                    <Label x:Name="AmountL"
+                           Width="147"
+                           Height="26"
+                           Margin="303,290,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Сумма начисления"
+                           FontSize="12"
+                           Visibility="Hidden" />
+                    <TextBox x:Name="ActivationAmountB"
+                             Width="125"
+                             Height="24"
+                             Margin="425,293,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding activationAmount,
+                                            StringFormat=0.00,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             Visibility="Hidden" />
+                    <Label x:Name="AccountTypeL"
+                           Width="82"
+                           Height="26"
+                           Margin="303,264,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Тип счета"
+                           FontSize="12"
+                           Visibility="Hidden" />
+                    <TextBox x:Name="AccountTypeB"
+                             Width="125"
+                             Height="24"
+                             Margin="425,264,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding accountType,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap"
+                             Visibility="Hidden" />
+                    <Button x:Name="ActivationBMSB"
+                            Width="145"
+                            Height="30"
+                            Margin="670,273,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding BMSActivationOperation}"
+                            Content="Начисление"
+                            FontFamily="Tahoma"
+                            FontSize="16"
+                            Visibility="Hidden">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Border Height="75"
+                            Margin="25,348,45,0"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <Label x:Name="BMSL_Copy1"
+                           Width="120"
+                           Height="30"
+                           Margin="1015,393,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="BMS операции"
+                           FontSize="16"
+                           Opacity="0.5">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Label.Effect>
+                    </Label>
+                    <Label x:Name="CardNumForLockUnlockL"
+                           Width="147"
+                           Height="26"
+                           Margin="35,362,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Номер карты"
+                           FontSize="12" />
+                    <TextBox x:Name="CardNumForLockUnlockB"
+                             Width="130"
+                             Height="24"
+                             Margin="160,364,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding cardNumForLockUnlock,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <CheckBox x:Name="isTokenNeedC1"
+                              Width="181"
+                              Height="16"
+                              Margin="160,393,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Content="слать токен"
+                              FontSize="12"
+                              IsChecked="{Binding isTokenNeed,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                    <Button x:Name="LockCard"
+                            Width="145"
+                            Height="30"
+                            Margin="485,371,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding BMSLockCardOperation}"
+                            Content="Заблокировать"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button x:Name="UnLockCard"
+                            Width="145"
+                            Height="30"
+                            Margin="670,371,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding BMSUnLockCardOperation}"
+                            Content="Разблокировать"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button x:Name="SendToken"
+                            Width="145"
+                            Height="30"
+                            Margin="855,371,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding BMSSendTokenOperation}"
+                            Content="Послать токен"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Border Height="53"
+                            Margin="25,443,45,0"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <Label x:Name="RefreshActionsL"
+                           Width="260"
+                           Height="30"
+                           Margin="875,466,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Обновление терминалов и акций"
+                           FontSize="16"
+                           Opacity="0.5">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Label.Effect>
+                    </Label>
+                    <Button x:Name="RefreshActionB"
+                            Width="145"
+                            Height="30"
+                            Margin="670,453,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding RefreshActionsOperation}"
+                            Content="Рефреш"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Label x:Name="RefreshActionL"
+                           Width="147"
+                           Height="26"
+                           Margin="35,459,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Адрес процессинга"
+                           FontSize="12" />
+                    <TextBox x:Name="RefreshActions"
+                             Width="270"
+                             Height="24"
+                             Margin="160,459,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding processingAddress,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <CheckBox x:Name="isEnableExtraPaymentC"
+                              Width="181"
+                              Height="16"
+                              Margin="160,74,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Content="разрешаем доплату"
+                              FontSize="12"
+                              IsChecked="{Binding isEnableExtraPayment,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                    <Button x:Name="QRCardNumFindTime"
+                            Width="205"
+                            Height="30"
+                            Margin="485,98,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding HashCardFindTime}"
+                            Content="Подбор времени генерации"
+                            FontFamily="Tahoma"
+                            FontSize="15">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button x:Name="CardNumQR"
+                            Width="170"
+                            Height="30"
+                            Margin="830,98,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding CardNumFromHashOperation}"
+                            Content="Получить номер карты"
+                            FontFamily="Tahoma"
+                            FontSize="15">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button x:Name="SendSMS"
+                            Width="215"
+                            Height="30"
+                            Margin="485,275,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding SendSMSOperation}"
+                            Content="Отправить SMS"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Label x:Name="SendMessage"
+                           Width="80"
+                           Height="30"
+                           Margin="1055,298,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="SMS/Push"
+                           FontSize="16"
+                           Opacity="0.5"
+                           RenderTransformOrigin="0.5,0">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Label.Effect>
+                    </Label>
+                    <Button x:Name="SendPush"
+                            Width="215"
+                            Height="30"
+                            Margin="785,276,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding SendPushOperation}"
+                            Content="Отправить Push"
+                            FontFamily="Tahoma"
+                            FontSize="16">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="0.134" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <TextBox x:Name="PhoneMobileB"
+                             Width="130"
+                             Height="24"
+                             Margin="160,263,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding phoneMobile,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="PhoneMobileL"
+                           Width="110"
+                           Height="26"
+                           Margin="35,262,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Номер телефона"
+                           FontSize="12" />
+                    <TextBox x:Name="TextMessageB"
+                             Width="270"
+                             Height="24"
+                             Margin="160,295,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="11.333"
+                             Text="{Binding textMessage,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
+                    <Label x:Name="TextMessageL"
+                           Width="110"
+                           Height="26"
+                           Margin="35,293,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Текст сообщения"
+                           FontSize="12" />
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Width="300"
+                     Margin="-2,-2,0,-1"
+                     HorizontalAlignment="Left"
+                     FontSize="16"
+                     Header="Отчеты">
+                <TabItem.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#FFF3F3F3" />
+                        <GradientStop Offset="0.5" Color="#FFEBEBEB" />
+                        <GradientStop Offset="0.5" Color="#FFDDDDDD" />
+                        <GradientStop Offset="1" Color="#FFF5BC23" />
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Offset="0" Color="Beige" />
+                            <GradientStop FrameworkElement.FlowDirection="RightToLeft" Offset="1" Color="#FFD49B03" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Border Width="715"
+                            Height="365"
+                            Margin="30,113,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </Border.Effect>
+                    </Border>
+                    <Label x:Name="ReportLabel"
+                           Width="178"
+                           Height="38"
+                           Margin="888,15,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Бонусный отчет"
+                           FontSize="21.333" />
+                    <TextBox x:Name="BeginDate"
+                             Width="255"
+                             Height="50"
+                             Margin="435,193,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="23"
+                             RenderTransformOrigin="1.935,3.826"
+                             Text="{Binding beginDate,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Center"
+                             TextWrapping="Wrap"
+                             ToolTip="Укажите начальную дату в формате yyyy-MM-ddTHH24:mi:ss (например 2018-05-19T19:08:00)" />
+                    <TextBox x:Name="EndDate"
+                             Width="255"
+                             Height="48"
+                             Margin="435,390,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="23"
+                             RenderTransformOrigin="1.935,3.826"
+                             Text="{Binding endDate,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Center"
+                             TextWrapping="Wrap"
+                             ToolTip="Укажите конечную дату в формате yyyy-MM-ddTHH24:mi:ss (например 2018-05-19T19:08:00)" />
+                    <TextBox x:Name="ReportData"
+                             Width="350"
+                             Height="431"
+                             Margin="786,78,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontFamily="Global Monospace"
+                             FontSize="13.333"
+                             ForceCursor="True"
+                             Text="{Binding reportData,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Justify"
+                             TextOptions.TextFormattingMode="Display">
+                        <TextBox.Effect>
+                            <DropShadowEffect BlurRadius="10" />
+                        </TextBox.Effect>
+                    </TextBox>
+                    <Button x:Name="SummaryReport"
+                            Width="195"
+                            Height="80"
+                            Margin="85,163,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding SummaryReportOperation}"
+                            Content="Итоговый"
+                            FontFamily="Tahoma"
+                            FontSize="26">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="DetailReport"
+                            Width="195"
+                            Height="83"
+                            Margin="85,355,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding DetailReportOperation}"
+                            Content="Детальный"
+                            FontFamily="Tahoma"
+                            FontSize="26">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Label x:Name="BeginDateL"
+                           Width="200"
+                           Height="45"
+                           Margin="490,148,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Начальная дата"
+                           FontSize="20" />
+                    <Label x:Name="EndDateL"
+                           Width="200"
+                           Height="40"
+                           Margin="490,345,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Конечная дата"
+                           FontSize="20" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

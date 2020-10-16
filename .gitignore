@@ -1,0 +1,5 @@
+/cbposlib1.dll/obj/*
+/cbposlib1.dll/bin/*
+Newtonsoft.Json.dll
+icon.ico
+.vs/
